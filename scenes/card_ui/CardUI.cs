@@ -8,6 +8,7 @@ public partial class CardUI : Control
 
     public ColorRect color;
     public Label state;
+    public Area2D dropPointDetector;
 
     public override void _Ready()
     {

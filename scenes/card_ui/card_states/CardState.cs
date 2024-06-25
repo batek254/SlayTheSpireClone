@@ -31,12 +31,12 @@ public partial class CardState : Node
         return;
     }
 
-    public void OnInput(InputEvent @event)
+    public virtual void OnInput(InputEvent @event)
     {
         return;
     }
     
-    public void OnGUIInput(InputEvent @event)
+    public virtual void OnGUIInput(InputEvent @event)
     {
         return;
     }

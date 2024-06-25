@@ -16,5 +16,12 @@ public partial class CardBaseState : CardState
 		cardUI.PivotOffset = new Vector2(0, 0);
 	}
 
-	
+    public override void OnGUIInput(InputEvent @event)
+    {
+        if (@event.IsActionPressed("left_mouse"))
+		{
+			cardUI.PivotOffset = cardUI.GetGlobalMousePosition() - cardUI.GlobalPosition;
+			EmitSignal(CardState.SignalName.TransitionRequested, this.state.ToString(), State.Clicked.ToString()); // is ToString() necessary?
+		}
+    }
 }
