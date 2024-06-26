@@ -8,14 +8,18 @@ public partial class CardStateMachine : Node
     
     public CardState currentState;
     public Godot.Collections.Dictionary states;
+    public CardState state;
 
     public void Init(CardUI card)
     {
+        states = new Godot.Collections.Dictionary();
         foreach (Node AChild in GetChildren())
         {
             if (AChild is CardState)
             {
-                CardState state = (CardState)AChild;
+                //CardState state = (CardState)AChild;
+                state = (CardState)AChild;
+                //states = new Godot.Collections.Dictionary();
                 states.Add(state.state.ToString(), state);
                 state.TransitionRequested += _OnTransitionRequested;
                 state.cardUI = card;

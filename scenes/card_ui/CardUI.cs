@@ -13,7 +13,7 @@ public partial class CardUI : Control
 
     public override void _Ready()
     {
-        color = GetNode<ColorRect>("ColorRect");
+        color = GetNode<ColorRect>("Color");
         state = GetNode<Label>("State");
         cardStateMachine = GetNode<CardStateMachine>("CardStateMachine");
         cardStateMachine.Init(this);
