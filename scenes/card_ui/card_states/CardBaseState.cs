@@ -11,7 +11,7 @@ public partial class CardBaseState : CardState
 		}
 
 		EmitSignal(CardUI.SignalName.ReparentRequested, cardUI);
-		cardUI.color.Color = Colors.Green;
+		cardUI.color.Color = Colors.WebGreen;
 		cardUI.state.Text = "Base";
 		cardUI.PivotOffset = new Vector2(0, 0);
 	}
