@@ -24,7 +24,7 @@ public partial class CardUI : Control
         cardStateMachine.OnInput(@event);
     }
 
-    public void _OnGuiInput(InputEvent @event)
+    public void _OnGuiInput(InputEvent @event) // delete _ prefix and update it in the Node Signals in Godot
     {
         cardStateMachine.OnGUIInput(@event);
     }

@@ -31,6 +31,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.101961, 0.282353, 0.176471, 1)
 
 [node name="State" type="Label" parent="."]
@@ -61,15 +62,12 @@ script = ExtResource("4_78ahf")
 
 [node name="CardClickedState" type="Node" parent="CardStateMachine"]
 script = ExtResource("5_g8xud")
-state = 1
 
 [node name="CardDraggingState" type="Node" parent="CardStateMachine"]
 script = ExtResource("6_bl416")
-state = 2
 
 [node name="CardReleasedState" type="Node" parent="CardStateMachine"]
 script = ExtResource("7_i33o4")
-state = 4
 
 [connection signal="gui_input" from="." to="." method="_OnGuiInput"]
 [connection signal="mouse_entered" from="." to="." method="_OnMouseEntered"]

@@ -21,7 +21,7 @@ public partial class CardStateMachine : Node
                 state = (CardState)AChild;
                 //states = new Godot.Collections.Dictionary();
                 states.Add(state.state.ToString(), state);
-                state.TransitionRequested += _OnTransitionRequested;
+                state.TransitionRequested += OnTransitionRequested;
                 state.cardUI = card;
             }
         }
@@ -65,29 +65,32 @@ public partial class CardStateMachine : Node
         }
     }
 
-    private void _OnTransitionRequested(CardState from, CardState.State to)
+    private void OnTransitionRequested(CardState.State from, CardState.State to)
     {
-        if (from != currentState)
+        GD.Print("Transition requested from: " + from.ToString() + " to: " + to.ToString());
+        if (from != currentState.state)
         {
             GD.PrintErr("Transition requested from a state that is not the current state");
             return;
         }
     
         CardState newState = (CardState)states[to.ToString()];
+        GD.Print("Transition requested from: " + from.ToString() + " to: " + to.ToString());
         if (newState == null)
         {
             GD.PrintErr("State not found: " + to.ToString());
             return;
         }
-
-        if (currentState != null)
-        {
-            currentState.Exit();
-        }
-
+    
+        //if (currentState != null)
+        //{
+        //    GD.Print("Exiting state: " + currentState.state.ToString());
+        //    currentState.Exit();
+        //}
+    
         newState.Enter();
         currentState = newState;
-
+        GD.Print("Entering state: " + currentState.state.ToString());
     }
 
 }
