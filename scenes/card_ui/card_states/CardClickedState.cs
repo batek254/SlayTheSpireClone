@@ -7,7 +7,8 @@ public partial class CardClickedState : CardState
     {
         cardUI.color.Color = Colors.Orange;
 		cardUI.state.Text = "Clicked";
-		cardUI.dropPointDetector.Monitoring = true; // add drop point detector
+		cardUI.GetNode<Area2D>("DropPointDetector").Monitoring = true;
+		//cardUI.dropPointDetector.Monitoring = true; // add drop point detector
     }
 
 	public override void OnInput(InputEvent @event)

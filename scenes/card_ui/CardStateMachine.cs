@@ -4,11 +4,13 @@ using System;
 public partial class CardStateMachine : Node
 {
     [Export]
-    public CardState initialState;
-    
-    public CardState currentState;
-    public Godot.Collections.Dictionary states;
-    public CardState state;
+    private CardState initialState;
+
+    private CardState currentState;
+    private CardState state; // singleton for state
+    private Godot.Collections.Dictionary states;
+    private int i = 0;
+
 
     public void Init(CardUI card)
     {
@@ -18,6 +20,7 @@ public partial class CardStateMachine : Node
             if (AChild is CardState)
             {
                 //CardState state = (CardState)AChild;
+                //state = GetNode<CardState>("/root/card_ui/card_states/CardState");
                 state = (CardState)AChild;
                 //states = new Godot.Collections.Dictionary();
                 states.Add(state.state.ToString(), state);
@@ -28,8 +31,8 @@ public partial class CardStateMachine : Node
 
         if (initialState != null)
         {
+            initialState.Enter();
             currentState = initialState;
-            currentState.Enter();
         }
     }
 
@@ -65,20 +68,18 @@ public partial class CardStateMachine : Node
         }
     }
 
-    private void OnTransitionRequested(CardState.State from, CardState.State to)
+    private void OnTransitionRequested(string from, string to) // string or State?
     {
-        GD.Print("Transition requested from: " + from.ToString() + " to: " + to.ToString());
-        if (from != currentState.state)
+        if (from != currentState.state.ToString())
         {
             GD.PrintErr("Transition requested from a state that is not the current state");
             return;
         }
     
-        CardState newState = (CardState)states[to.ToString()];
-        GD.Print("Transition requested from: " + from.ToString() + " to: " + to.ToString());
+        CardState newState = (CardState)states[to];
         if (newState == null)
         {
-            GD.PrintErr("State not found: " + to.ToString());
+            GD.PrintErr("State not found: " + to);
             return;
         }
     
@@ -90,7 +91,6 @@ public partial class CardStateMachine : Node
     
         newState.Enter();
         currentState = newState;
-        GD.Print("Entering state: " + currentState.state.ToString());
     }
 
 }

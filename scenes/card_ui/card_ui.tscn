@@ -62,13 +62,16 @@ script = ExtResource("4_78ahf")
 
 [node name="CardClickedState" type="Node" parent="CardStateMachine"]
 script = ExtResource("5_g8xud")
+state = 1
 
 [node name="CardDraggingState" type="Node" parent="CardStateMachine"]
 script = ExtResource("6_bl416")
+state = 2
 
 [node name="CardReleasedState" type="Node" parent="CardStateMachine"]
 script = ExtResource("7_i33o4")
+state = 4
 
-[connection signal="gui_input" from="." to="." method="_OnGuiInput"]
-[connection signal="mouse_entered" from="." to="." method="_OnMouseEntered"]
-[connection signal="mouse_exited" from="." to="." method="_OnMouseExited"]
+[connection signal="gui_input" from="." to="." method="OnGuiInput"]
+[connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="." to="." method="OnMouseExited"]

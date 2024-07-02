@@ -5,7 +5,6 @@ public partial class CardBaseState : CardState
 {
 	public override async void Enter()
 	{
-		GD.Print("CardBaseState.Enter()");
 		if (!cardUI.IsNodeReady())
 		{
 			await ToSignal(cardUI, "ready");
@@ -24,9 +23,10 @@ public partial class CardBaseState : CardState
         if (@event.IsActionPressed("left_mouse"))
 		{
 			cardUI.PivotOffset = cardUI.GetGlobalMousePosition() - cardUI.GlobalPosition;
-			GD.Print("from " + this.state.ToString() + " to " + State.Clicked.ToString());
-			EmitSignal(CardState.SignalName.TransitionRequested, this.state.ToString(), State.Clicked.ToString()); // is ToString() necessary?
-			GD.Print("from " + this.state.ToString() + " to " + State.Clicked.ToString());
+			//state.EmitSignal(nameof(TransitionRequested), this.state.ToString(), State.Clicked.ToString());
+			//EmitSignal(nameof(CardState.SignalName.TransitionRequested), this.state.ToString(), State.Clicked.ToString());
+			EmitSignal(CardState.SignalName.TransitionRequested, this.state.ToString(), State.Clicked.ToString());
+			//GD.Print("from " + this.state.ToString() + " to " + State.Clicked.ToString());
 		}
     }
 }

@@ -14,7 +14,7 @@ public partial class CardState : Node
     }
 
     [Signal]
-    public delegate void TransitionRequestedEventHandler(CardState.State from, State to);
+    public delegate void TransitionRequestedEventHandler(string from, string to); // string or State?
 
     [Export]
     public State state;
