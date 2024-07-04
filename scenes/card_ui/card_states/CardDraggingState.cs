@@ -35,7 +35,7 @@ public partial class CardDraggingState : CardState
 			//InputEvent cancel = @event;
 			EmitSignal(CardState.SignalName.TransitionRequested, this.state.ToString(), State.Base.ToString());
 		}
-		else if (@event.IsActionReleased("left_mouse") || @event.IsActionPressed("left_mouse"))
+		else if (minimumDragTimeElapsed && (@event.IsActionReleased("left_mouse") || @event.IsActionPressed("left_mouse")))
 		{
 			//InputEvent confirm = @event;
 			GetViewport().SetInputAsHandled();
