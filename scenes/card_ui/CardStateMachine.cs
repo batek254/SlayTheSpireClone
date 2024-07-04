@@ -14,7 +14,7 @@ public partial class CardStateMachine : Node
 
     public void Init(CardUI card)
     {
-        states = new Godot.Collections.Dictionary();
+        states = new Godot.Collections.Dictionary(); // maybe move it to _Ready?
         foreach (Node AChild in GetChildren())
         {
             if (AChild is CardState)
