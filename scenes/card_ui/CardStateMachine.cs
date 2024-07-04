@@ -4,28 +4,35 @@ using System;
 public partial class CardStateMachine : Node
 {
     [Export]
-    public CardState initialState;
-    
-    public CardState currentState;
-    public Godot.Collections.Dictionary states;
+    private CardState initialState;
+
+    private CardState currentState;
+    private CardState state; // singleton for state
+    private Godot.Collections.Dictionary states;
+    private int i = 0;
+
 
     public void Init(CardUI card)
     {
+        states = new Godot.Collections.Dictionary(); // maybe move it to _Ready?
         foreach (Node AChild in GetChildren())
         {
             if (AChild is CardState)
             {
-                CardState state = (CardState)AChild;
+                //CardState state = (CardState)AChild;
+                //state = GetNode<CardState>("/root/card_ui/card_states/CardState");
+                state = (CardState)AChild;
+                //states = new Godot.Collections.Dictionary();
                 states.Add(state.state.ToString(), state);
-                state.TransitionRequested += _OnTransitionRequested;
+                state.TransitionRequested += OnTransitionRequested;
                 state.cardUI = card;
             }
         }
 
         if (initialState != null)
         {
+            initialState.Enter();
             currentState = initialState;
-            currentState.Enter();
         }
     }
 
@@ -61,29 +68,29 @@ public partial class CardStateMachine : Node
         }
     }
 
-    private void _OnTransitionRequested(CardState from, CardState.State to)
+    private void OnTransitionRequested(string from, string to) // string or State?
     {
-        if (from != currentState)
+        if (from != currentState.state.ToString())
         {
             GD.PrintErr("Transition requested from a state that is not the current state");
             return;
         }
     
-        CardState newState = (CardState)states[to.ToString()];
+        CardState newState = (CardState)states[to];
         if (newState == null)
         {
-            GD.PrintErr("State not found: " + to.ToString());
+            GD.PrintErr("State not found: " + to);
             return;
         }
-
-        if (currentState != null)
-        {
-            currentState.Exit();
-        }
-
+    
+        //if (currentState != null)
+        //{
+        //    GD.Print("Exiting state: " + currentState.state.ToString());
+        //    currentState.Exit();
+        //}
+    
         newState.Enter();
         currentState = newState;
-
     }
 
 }

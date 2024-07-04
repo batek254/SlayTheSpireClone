@@ -3,13 +3,19 @@ using System;
 
 public partial class CardClickedState : CardState
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+    public override void Enter()
+    {
+        cardUI.color.Color = Colors.Orange;
+		cardUI.state.Text = "Clicked";
+		cardUI.GetNode<Area2D>("DropPointDetector").Monitoring = true;
+		//cardUI.dropPointDetector.Monitoring = true; // add drop point detector
+    }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void OnInput(InputEvent @event)
 	{
+		if (@event is InputEventMouseMotion)
+		{
+			EmitSignal(CardState.SignalName.TransitionRequested, this.state.ToString(), State.Dragging.ToString()); // is ToString() necessary?
+		}
 	}
 }

@@ -3,13 +3,29 @@ using System;
 
 public partial class CardReleasedState : CardState
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	public bool played;
+
+	public override void Enter()
 	{
+		cardUI.color.Color = Colors.DarkViolet;
+		cardUI.state.Text = "Released";
+
+		played = false;
+
+		if (cardUI.targets.Count > 0)
+		{
+			played = true;
+			cardUI.targets.ForEach(target => GD.Print(target.Name.ToString()));
+		}
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    public override void OnInput(InputEvent @event)
+    {
+        if (played)
+		{
+			return;
+		}
+
+		EmitSignal(CardState.SignalName.TransitionRequested, this.state.ToString(), State.Base.ToString());
+    }
 }

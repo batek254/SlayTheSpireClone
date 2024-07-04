@@ -14,7 +14,7 @@ public partial class CardState : Node
     }
 
     [Signal]
-    public delegate void TransitionRequestedEventHandler(CardState from, State to);
+    public delegate void TransitionRequestedEventHandler(string from, string to); // string or State?
 
     [Export]
     public State state;
@@ -31,12 +31,12 @@ public partial class CardState : Node
         return;
     }
 
-    public void OnInput(InputEvent @event)
+    public virtual void OnInput(InputEvent @event)
     {
         return;
     }
     
-    public void OnGUIInput(InputEvent @event)
+    public virtual void OnGUIInput(InputEvent @event)
     {
         return;
     }
