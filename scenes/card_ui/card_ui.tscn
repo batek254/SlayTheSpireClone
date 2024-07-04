@@ -75,3 +75,5 @@ state = 4
 [connection signal="gui_input" from="." to="." method="OnGuiInput"]
 [connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseExited"]
+[connection signal="area_entered" from="DropPointDetector" to="." method="OnDropPointDetectorAreaEntered"]
+[connection signal="area_exited" from="DropPointDetector" to="." method="OnDropPointDetectorAreaExited"]

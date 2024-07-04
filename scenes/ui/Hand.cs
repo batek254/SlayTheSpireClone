@@ -16,5 +16,4 @@ public partial class Hand : HBoxContainer
     {
         child.Reparent(this);
     }
-
 }

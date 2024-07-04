@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class CardUI : Control
 {
@@ -10,6 +12,7 @@ public partial class CardUI : Control
     public Label state;
     public Area2D dropPointDetector;
     public CardStateMachine cardStateMachine;
+    public List<Node> targets = new List<Node>();
 
     public override void _Ready()
     {
@@ -37,5 +40,20 @@ public partial class CardUI : Control
     public void OnMouseExited()
     {
         cardStateMachine.OnMouseExited();
+    }
+
+    public void OnDropPointDetectorAreaEntered(Area2D area)
+    {
+        if (!targets.Contains(area))
+        {
+            GD.Print(area.GetType().ToString() + " entered");
+            targets = targets.Append(area).ToList();
+            targets.ForEach(target => GD.Print(target.Name.ToString()));
+        }
+    }
+
+    public void OnDropPointDetectorAreaExited(Area2D area)
+    {
+        targets.Remove(area);
     }
 }
