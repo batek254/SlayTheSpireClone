@@ -8,6 +8,9 @@ public partial class CardUI : Control
     [Signal]
     public delegate void ReparentRequestedEventHandler(CardUI whichCardUI);
 
+    [Export]
+    public Card card;
+
     public ColorRect color;
     public Label state;
     public Area2D dropPointDetector;
