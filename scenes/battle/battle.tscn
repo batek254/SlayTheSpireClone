@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfnq7jtn00xvs"]
+[gd_scene load_steps=9 format=3 uid="uid://cfnq7jtn00xvs"]
 
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_kwqoc"]
+[ext_resource type="Texture2D" uid="uid://1u3b3hwqd8yh" path="res://art/tile_0110.png" id="2_sksfy"]
 [ext_resource type="Script" path="res://scenes/ui/Hand.cs" id="2_w2dwi"]
 [ext_resource type="PackedScene" uid="uid://cdea1u607lpnr" path="res://scenes/card_ui/card_ui.tscn" id="2_w3n5v"]
 [ext_resource type="Resource" uid="uid://cfgthq8v2lgko" path="res://characters/warrior/cards/warrior_axe_attack.tres" id="4_0jb57"]
@@ -8,6 +9,8 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2v1um"]
 size = Vector2(256, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mbgjq"]
 
 [node name="Battle" type="Node2D"]
 metadata/_edit_lock_ = true
@@ -24,6 +27,17 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CardDropArea"]
 position = Vector2(128, 50)
 shape = SubResource("RectangleShape2D_2v1um")
+debug_color = Color(0, 0.6, 0.701961, 0.117647)
+
+[node name="Enemy" type="Area2D" parent="."]
+position = Vector2(210, 77)
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+texture = ExtResource("2_sksfy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource("RectangleShape2D_mbgjq")
 
 [node name="BattleUI" type="CanvasLayer" parent="." groups=["ui_layer"]]
 
